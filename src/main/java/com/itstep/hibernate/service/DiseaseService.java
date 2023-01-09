@@ -1,6 +1,7 @@
 package com.itstep.hibernate.service;
 
 import com.itstep.hibernate.dao.models.Department;
+import com.itstep.hibernate.dao.models.Diseases;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,20 +11,22 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class DepartmentService {
+public class DiseaseService {
 
-    public List<Department> getAllDepartments() {
+    public List<Diseases> getAllDiseases() {
         Transaction transaction = null;
-        List<Department> resultSet = null;
+        List<Diseases> resultSet = null;
         try (Session session = HibernateConfiguration.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
 
             CriteriaBuilder cb = session.getCriteriaBuilder();
-            CriteriaQuery<Department> cq = cb.createQuery(Department.class);
-            Root<Department> rootEntry = cq.from(Department.class);
-            CriteriaQuery<Department> all = cq.select(rootEntry);
-            TypedQuery<Department> allQuery = session.createQuery(all);
+            CriteriaQuery<Diseases> cq = cb.createQuery(Diseases.class);
+            Root<Diseases> rootEntry = cq.from(Diseases.class);
+            CriteriaQuery<Diseases> all = cq.select(rootEntry);
+
+            TypedQuery<Diseases> allQuery = session.createQuery(all);
+
             resultSet = allQuery.getResultList();
             transaction.commit();
 
@@ -36,13 +39,13 @@ public class DepartmentService {
         return resultSet;
     }
 
-    public void saveDepartment(Department department) {
+    public void saveDisease(Diseases diseases) {
         Transaction transaction = null;
         try (Session session = HibernateConfiguration.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
-            session.save(department);
+            session.save(diseases);
             // commit transaction
             transaction.commit();
         } catch (Exception e) {

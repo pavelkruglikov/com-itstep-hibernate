@@ -1,6 +1,8 @@
 package com.itstep.hibernate.service;
 
 import com.itstep.hibernate.dao.models.Department;
+import com.itstep.hibernate.dao.models.Diseases;
+import com.itstep.hibernate.dao.models.Doctor;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -30,6 +32,8 @@ public class HibernateConfiguration {
 
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(Department.class);
+                configuration.addAnnotatedClass(Doctor.class);
+                configuration.addAnnotatedClass(Diseases.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

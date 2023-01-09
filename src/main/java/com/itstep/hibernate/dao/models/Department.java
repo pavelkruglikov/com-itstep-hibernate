@@ -1,12 +1,15 @@
 package com.itstep.hibernate.dao.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "departments")
 public class Department {
     @Id
-    int id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    long id;
     String name;
     int building;
     int floor;
@@ -14,7 +17,8 @@ public class Department {
 
     public Department() {
     }
-    public Department(int id, String name, int building, int floor, Double financing) {
+
+    public Department(long id, String name, int building, int floor, Double financing) {
         this.id = id;
         this.name = name;
         this.building = building;
@@ -22,11 +26,11 @@ public class Department {
         this.financing = financing;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
